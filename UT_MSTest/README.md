@@ -1,6 +1,7 @@
 # MSTest
 
 - 2019/02/05
+- dotnet 2.2.103
 
 ```powershell
 > mkdir UT_MSTest
@@ -33,7 +34,7 @@
 > dotnet sln add ./PrimeService.Tests/PrimeService.Tests.csproj
 # 將測試用專案, 新增至 /UT_MSTest.sln
 
-# 在專案的根目錄底下執行 test
+# 在 / 底下執行測試
 > dotnet test
 # 測試必然失敗, 開始 Coding, 好讓測試可以成功
 # 開始 Coding /PrimeService/PrimeService.cs

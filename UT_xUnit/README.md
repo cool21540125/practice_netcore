@@ -1,6 +1,7 @@
 # xUnit
 
 - 2019/02/05
+- dotnet 2.2.103
 
 ```powershell
 > mkdir UT_xUnit
