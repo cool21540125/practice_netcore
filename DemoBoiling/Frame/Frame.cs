@@ -44,7 +44,14 @@ namespace Boiling
             {
                 int firstThrow = throws[ball++];
                 int secondThrow = throws[ball++];
-                score += firstThrow + secondThrow;
+                
+                int frameScore = firstThrow + secondThrow;
+
+                // Spare 需要知道下一球的狀況
+                if (frameScore == 10)
+                    score += frameScore + throws[ball++];
+                else
+                    score += frameScore;
             }
 
             return score;
