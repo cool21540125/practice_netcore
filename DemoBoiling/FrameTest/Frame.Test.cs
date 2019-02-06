@@ -3,17 +3,14 @@ using Boiling;
 
 namespace Boiling.Tests
 {
+    [TestFixture]
     public class Tests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
-        public void Test1()
+        public void TestScoreNoThrows()
         {
-            Assert.Pass();
+            Frame f = new Frame();
+            Assert.AreEqual(0, f.Score);
         }
     }
 }
