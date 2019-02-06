@@ -49,7 +49,7 @@ namespace Boiling
 
                 // Spare 需要知道下一球的狀況
                 if (frameScore == 10)
-                    score += frameScore + throws[ball++];
+                    score += frameScore + throws[ball];
                 else
                     score += frameScore;
             }
