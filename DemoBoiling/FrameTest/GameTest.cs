@@ -40,5 +40,14 @@ namespace Boiling.Tests
             Assert.AreEqual(9, game.ScoreForFrame(1));
             Assert.AreEqual(18, game.ScoreForFrame(2));
         }
+
+        [Test]
+        public void TestSimpleSpare()
+        {
+            game.Add(3);
+            game.Add(7);
+            game.Add(3);
+            Assert.AreEqual(13, game.ScoreForFrame(1));
+        }
     }
 }
