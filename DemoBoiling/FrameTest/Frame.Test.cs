@@ -4,7 +4,7 @@ using Boiling;
 namespace Boiling.Tests
 {
     [TestFixture]
-    public class Tests
+    public class FrameTest
     {
         [Test]
         public void TestScoreNoThrows()
