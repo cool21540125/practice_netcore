@@ -22,16 +22,33 @@ namespace Boiling
         private int score;
         private int[] throws = new int[21];
         private int currentThrow;
+        private int currentFrame;
+        private bool isFirstThrow = true;
 
         public int Score
         {
             get { return score; }
         }
 
+        public int CurrentFrame
+        {
+            get { return currentFrame; }
+        }
+
         public void Add(int pins)
         {
             throws[currentThrow++] = pins;
             score += pins;
+
+            if (isFirstThrow)
+            {
+                isFirstThrow = false;
+                currentFrame++;
+            }
+            else
+            {
+                isFirstThrow = true;
+            }
         }
 
         public int ScoreForFrame(int theFrame)
