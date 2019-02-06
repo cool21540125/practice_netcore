@@ -6,10 +6,17 @@ namespace Boiling.Tests
     [TestFixture]
     public class GameTest
     {
+        private Game game;
+
+        [SetUp]
+        public void SetUp()
+        {
+            game = new Game();
+        }
+
         [Test]
         public void TestOneThrow()
         {
-            Game game = new Game();
             game.Add(5);
             Assert.AreEqual(5, game.Score);
         }
@@ -17,7 +24,6 @@ namespace Boiling.Tests
         [Test]
         public void TestTwoThrowsNoMark()
         {
-            Game game = new Game();
             game.Add(5);
             game.Add(4);
             Assert.AreEqual(9, game.Score);
@@ -26,7 +32,6 @@ namespace Boiling.Tests
         [Test]
         public void TestFourThrowsNoMark()
         {
-            Game game = new Game();
             game.Add(5);
             game.Add(4);
             game.Add(7);
