@@ -8,5 +8,10 @@ namespace Boiling
         {
             get { return 0; }
         }
+
+        public void Add(int pins)
+        {
+
+        }
     }
 }
