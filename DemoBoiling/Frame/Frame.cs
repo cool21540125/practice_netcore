@@ -17,66 +17,116 @@ namespace Boiling
         }
     }
 
-    public class Game
+    public class Scorer
     {
-        private int score;
+        private int ball;
         private int[] throws = new int[21];
         private int currentThrow;
-        private int currentFrame = 1;
-        private bool isFirstThrow = true;
 
-        public int Score
-        {
-            get { return score; }
-        }
-
-        public int CurrentFrame
-        {
-            get { return currentFrame; }
-        }
-
-        public void Add(int pins)
+        public void AddThrow(int pins)
         {
             throws[currentThrow++] = pins;
-            score += pins;
-
-            AdjustCurrentFrame();
-        }
-
-        private void AdjustCurrentFrame()
-        {
-            if (isFirstThrow)
-            {
-                isFirstThrow = false;
-            }
-            else
-            {
-                isFirstThrow = true;
-                currentFrame++;
-            }
         }
 
         public int ScoreForFrame(int theFrame)
         {
-            int ball = 0;
+            ball = 0;
             int score = 0;
             for (int currentFrame = 0; 
                 currentFrame < theFrame; 
                 currentFrame++)
             {
-                int firstThrow = throws[ball++];
-                int secondThrow = throws[ball++];
-                
-                int frameScore = firstThrow + secondThrow;
-
-                // Spare 需要知道下一球的狀況
-                if (frameScore == 10)
-                    score += frameScore + throws[ball];
+                if (Strike())
+                {
+                    score += 10 + NextTwoBallsForStrike;
+                    ball++;
+                }
+                else if (Spare())
+                {
+                    score += 10 + NextBallForSpare;
+                    ball += 2;
+                }
                 else
-                    score += frameScore;
+                {
+                    score += TwoBallsInFrame;
+                    ball += 2;
+                }
             }
 
             return score;
+        }
+
+        private int NextTwoBallsForStrike
+        {
+            get { return (throws[ball+1] + throws[ball+2]); }
+        }
+
+        private int NextBallForSpare
+        {
+            get { return throws[ball+2]; }
+        }
+
+        private bool Strike()
+        {
+            return throws[ball] == 10;
+        }
+
+        private int TwoBallsInFrame
+        {
+            get { return throws[ball] + throws[ball+1]; }
+        }
+
+        private bool Spare()
+        {
+            return (throws[ball] + throws[ball+1] == 10);
+        }
+    }
+
+    public class Game
+    {
+        private int currentFrame = 0;
+        private bool isFirstThrow = true;
+        private Scorer scorer = new Scorer();
+
+        public int Score
+        {
+            get { return ScoreForFrame(currentFrame); }
+        }
+
+        public void Add(int pins)
+        {
+            scorer.AddThrow(pins);
+            AdjustCurrentFrame(pins);
+        }
+
+        private void AdjustCurrentFrame(int pins)
+        {
+            if (LastBallInFrame(pins))
+                AdvanceFrame();
+            else
+                isFirstThrow = false;
+        }
+
+        private bool LastBallInFrame(int pins)
+        {
+            return Strike(pins) || (!isFirstThrow);
+        }
+
+        private bool Strike(int pins)
+        {
+            return (isFirstThrow && pins == 10);
+        }
+
+        private void AdvanceFrame()
+        {
+            currentFrame++;
+            if (currentFrame > 10)
+                currentFrame = 10;
+        }
+
+        public int ScoreForFrame(int theFrame)
+        {
+            return scorer.ScoreForFrame(theFrame);
         }
     }
 }
