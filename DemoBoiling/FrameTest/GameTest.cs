@@ -62,6 +62,7 @@ namespace Boiling.Tests
             game.Add(2);
             Assert.AreEqual(13, game.ScoreForFrame(1));
             Assert.AreEqual(18, game.ScoreForFrame(2));
+            Assert.AreEqual(18, game.Score);
             Assert.AreEqual(3, game.CurrentFrame);
         }
     }
