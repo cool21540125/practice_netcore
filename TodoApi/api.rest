@@ -1,0 +1,35 @@
+@baseUrl=https://localhost:5001
+
+###
+GET {{baseUrl}}
+
+###
+GET {{baseUrl}}/api/values
+
+### 
+GET {{baseUrl}}/api/todo/1
+
+### 
+GET {{baseUrl}}/api/todo/2
+
+### (無法阿~~~)
+POST {{baseUrl}}/api/todo
+Content-Type: application/json
+
+{
+    "name": "walk dog",
+    "isComplete": true
+}
+
+### 
+PUT {{baseUrl}}/api/todo/1
+Content-Type: application/json
+
+{
+    "ID": 1,
+    "name": "feed fish",
+    "isComplete": true
+}
+
+###
+DELETE {{baseUrl}}/api/todo/1
