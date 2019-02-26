@@ -1,0 +1,5 @@
+@baseUrl=https://localhost:5001
+
+###
+GET {{baseUrl}}/api/books
+
